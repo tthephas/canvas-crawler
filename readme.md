@@ -112,7 +112,7 @@ It's time to make our game! So our goal is to have an Ogre (which will be statio
 
 We want to have an Ogre object and a Hero object. They should look like this:
 ```javascript
-var ogre = {
+const ogre = {
   x: 200,
   y: 100,
   color: "#bada55",
@@ -125,7 +125,7 @@ var ogre = {
   }
 }
 
-var hero = {
+const hero = {
   x: 0,
   y: 0,
   color: "hotpink",
