@@ -100,7 +100,11 @@ const movementHandler = (e) => {
     // w = 87, a = 65, s= 83, d = 68
     // up = 38, left = 37, down= 40, right = 39
     // by linking these keycodes to a function(or code block) we can tell them to change the player x or y values
-    console.log('what the heck is ', e.keyCode)
+
+    ///  YOU CAN USE THIS FOR TESTING!!! TELLS ALOT //////
+    
+    //console.log('what the heck is e? ', e.keyCode)
+
     // make a conditional
     // if keycode equals something, do somethign !! 
     // use a switch case
@@ -132,6 +136,36 @@ const movementHandler = (e) => {
     }
 }
 
+//////// COLLISION DETECTION //////////
+
+// here we'll detect a hit between entities
+// to accurately do this we need to account for the entire space that one entity takes up
+// this means using hte player x, y, width, height
+// this also means using the ogre x, y, width, height
+const detectHit = () => {
+    //basically use a big if statement to see if any side of player hit any side of ogre
+    if (player.x < ogre.x + ogre.width
+        && player.x + player.width > ogre.x
+        && player.y < ogre.y + ogre.height
+        && player.y + player.height > ogre.y) {
+        //use for testing only
+        // console.log('hit!')
+        // console.log('player x ', player.x)
+        // console.log('player y ', player.y)
+        // console.log('ogre x ', ogre.x)
+        // console.log('ogre y ', ogre.y)
+        // status.textContent ='we have a hit!'
+        
+        //ogre disappears b/c of the render function in game loop
+        ogre.alive = false
+        //change the status box
+        status.textContent = 'YOU WIN'
+    } 
+}
+
+
+
+
 
 
 /// GAME LOOP //
@@ -146,6 +180,11 @@ const gameLoop = () => {
     //no console logs here if you can avoid it
     //for testing ok, but not in final
     
+    // putting hit detector at top so it takes precedence
+    if (ogre.alive) {
+        detectHit()
+    }
+
     // to resemble movement we shoudl clear the old canvas every loop, then instead of drawing a snake , b/c its maintaining all old positions of character, we'll just see our player move around
     ctx.clearRect(0, 0, game.width, game.height)
 
