@@ -108,20 +108,25 @@ const movementHandler = (e) => {
     switch (e.keyCode) {
         // move up
         case (87): 
+        case (38):
             //this moves player up 10px every press
             player.y -= 10
             //we need the break keyword ot mvoe to another case if needed
             break
         // move left
         case (65):
+        case (37):
             player.x -= 10
             break
         // move down
         case (83):
+        case (40):
         player.y += 10
             break
         // move right
         case (68):
+        case (39):
+            // if you make it plus minus 2 or whatever, it just moves SLOWER
             player.x += 10
             break
     }
@@ -139,8 +144,11 @@ const movementHandler = (e) => {
 
 const gameLoop = () => {
     //no console logs here if you can avoid it
-    
     //for testing ok, but not in final
+    
+    // to resemble movement we shoudl clear the old canvas every loop, then instead of drawing a snake , b/c its maintaining all old positions of character, we'll just see our player move around
+    ctx.clearRect(0, 0, game.width, game.height)
+
     player.render()
     movement.textContent = `${player.x}, ${player.y}`
     //if ogre is alive, he shows up
